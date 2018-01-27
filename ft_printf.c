@@ -12,51 +12,86 @@
 
 #include "ft_printf.h"
 
-static	char	*get_specifiers(char **format)
+static	int		parse(t_spec sp, va_list ap)
 {
-	char	*type;
+	if (!ft_strcmp(sp.type. "d") || !ft_strcmp(sp.type. "i")
+		|| !ft_strcmp(sp.type. "D"))
+		return (work_with_dec(sp, ap));
+}
+
+static	t_spec	separate_specifiers(char *specifiers)
+{
+	t_spec	spec;
+
+	spec.flag = get_flag(&specifiers);
+	spec.width = get_width(&specifiers);
+	spec.precision = get_precision(&specifiers);
+	spec.modifier = get_modifier(&specifiers);
+	spec.type = get_type(&specifiers);
+	return (spec);
+}
+
+static	t_spec	get_specifiers(char **format, char *type)
+{
 	int		count;
 	char	*spec;
+	t_spec	sep_spec;
 	int		i;
 
-	type = "sSpdDioOuUxXcC";
-	count = 0;
-	while (*format[count])
+	count = 1;
+	while ((*format)[count])
 	{
 		i = 0;
 		while (type[i])
 		{
-			if (*format[count] == type[i])
+			if ((*format)[count] == type[i])
 				break ;
 			i++;
 		}
+		if ((*format)[count] == type[i])
+			break ;
 		count++;
 	}
 	spec = ft_strsub(*format, 1, count);
-	*format += count + 1;
-	return (spec);
+	sep_spec = separate_specifiers(spec);
+	free(spec);
+	*format += count;
+	return (sep_spec);
 }
 
-static	void	parse(char **format, va_list ap)
+static	int		common(char **format)
 {
-	char	*specifiers;
-	char	*type;
+	t_spec	specifiers;
 
-	specifiers = get_specifiers(format);
+	specifiers = get_specifiers(format, "sSpdDioOuUxXcC");
+	count = work_with(specifiers, va);
+	return (count);
 }
 
 extern	int		ft_printf(const char *format, ...)
 {
 	va_list	ap;
+	int		printed;
 
+	printed = 0;
 	va_start(ap, format);
 	while (*format)
 	{
-		if (*format == '%')
-			parse(%format);
+		if (*format == '%' && *(format + 1) == '%')
+		{
+			format++;
+			ft_putchar('%');
+			printed++;
+		}
+		else if (*format == '%')
+			printed += common(&format);
 		else
+		{
 			ft_putchar(*format);
+			printed++;
+		}
 		format++;
 	}
-
+	va_end(ap);
+	return (printed);
 }

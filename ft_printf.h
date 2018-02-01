@@ -17,15 +17,6 @@
 # include "libft.h"
 # include <stdio.h>
 
-typedef	struct	s_specifiers
-{
-	t_flags		flag;
-	int			width;
-	int			precision;
-	char		*modifier;
-	char		*type;
-}				t_spec;
-
 typedef	struct	s_flags
 {
 	int			minus;
@@ -35,13 +26,23 @@ typedef	struct	s_flags
 	int			zero;
 }				t_flags;
 
+typedef	struct	s_specifiers
+{
+	t_flags		flag;
+	int			width;
+	int			precision;
+	char		*modifier;
+	char		*type;
+}				t_spec;
 
-void			ft_printf(const char *format, ...);
-char			*get_flag(char **sp);
+int				ft_printf(const char *format, ...);
+t_flags			get_flag(char **sp);
 int				get_width(char **sp);
 int				get_precision(char **sp);
 char			*get_modifier(char **sp);
 char			*get_type(char **sp);
 int				work_with_dec(t_spec sp, va_list ap);
+int				call_int(t_spec sp, int a);
+char			*precis(char *arg, t_spec sp, int a);
 
 #endif

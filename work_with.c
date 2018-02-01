@@ -28,15 +28,4 @@ extern	int		work_with_dec(t_spec sp, va_list ap)
 // 		return (call_intmax);
 // 	if (!ft_strcmp(sp.modifier, "z"))
 // 		return (call_usize_t);
-// }
-
-static	int		call_int(t_spec sp, int a)
-{
-	char	*arg;
-	char	*tmp;
-	char	*res;
-
-	tmp = res;
-	arg = itoa(a);
-
 }

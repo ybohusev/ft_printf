@@ -18,18 +18,23 @@ t_flags	get_flag(char **sp)
 	t_flags	flag;
 
 	i = 0;
+	flag.minus = 0;
+	flag.plus = 0;
+	flag.space = 0;
+	flag.hash = 0;
+	flag.zero = 0;
 	while ((*sp)[i] == '-' || (*sp)[i] == '+' || (*sp)[i] == ' ' ||
 			(*sp)[i] == '#' || (*sp)[i] == '0')
 	{
 		if ((*sp)[i] == '-')
 			flag.minus = 1;
-		if ((*sp)[i] == '+')
+		else if ((*sp)[i] == '+')
 			flag.plus = 1;
-		if ((*sp)[i] == ' ')
+		else if ((*sp)[i] == ' ')
 			flag.space = 1;
-		if ((*sp)[i] == '#')
+		else if ((*sp)[i] == '#')
 			flag.hash = 1;
-		if ((*sp)[i] == '0')
+		else if ((*sp)[i] == '0')
 			flag.zero = 1;
 		i++;
 	}

@@ -40,7 +40,7 @@ char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncat(char *dest, const char *src, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_putchar(char c);
-void				ft_putstr(const char *s);
+int					ft_putstr(const char *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *s, int fd);
 void				ft_putnbr(int n);

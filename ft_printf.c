@@ -14,8 +14,8 @@
 
 static	int		parse(t_spec sp, va_list ap)
 {
-	if (!ft_strcmp(sp.type. "d") || !ft_strcmp(sp.type. "i")
-		|| !ft_strcmp(sp.type. "D"))
+	if (!ft_strcmp(sp.type, "d") || !ft_strcmp(sp.type,"i")
+		|| !ft_strcmp(sp.type, "D"))
 		return (work_with_dec(sp, ap));
 }
 
@@ -59,12 +59,14 @@ static	t_spec	get_specifiers(char **format, char *type)
 	return (sep_spec);
 }
 
-static	int		common(char **format)
+static	int		common(char **format, va_list ap)
 {
 	t_spec	specifiers;
+	int		count;
 
+	count = 0;
 	specifiers = get_specifiers(format, "sSpdDioOuUxXcC");
-	count = work_with(specifiers, va);
+	count = parse(specifiers, ap);
 	return (count);
 }
 
@@ -84,7 +86,7 @@ extern	int		ft_printf(const char *format, ...)
 			printed++;
 		}
 		else if (*format == '%')
-			printed += common(&format);
+			printed += common((char**)&format, ap);
 		else
 		{
 			ft_putchar(*format);
@@ -94,4 +96,14 @@ extern	int		ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (printed);
+}
+
+int		main()
+{
+	int i;
+	i = ft_printf("%+05d\n", 1);
+	printf("%d\n", i);
+	i = printf("%+05d\n", 1);
+	printf("%d\n", i);
+	return 0;
 }

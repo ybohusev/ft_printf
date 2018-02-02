@@ -101,9 +101,9 @@ extern	int		ft_printf(const char *format, ...)
 int		main()
 {
 	int i;
-	i = ft_printf("%+05d\n", 1);
+	i = ft_printf("%+-5d\n", -15555555);
 	printf("%d\n", i);
-	i = printf("%+05d\n", 1);
+	i = printf("%hd\n", '5');
 	printf("%d\n", i);
 	return 0;
 }

@@ -87,7 +87,7 @@ char	*get_modifier(char **sp)
 	else if (**sp == 'h' || **sp == 'l' || **sp == 'j' || **sp == 'z')
 	{
 		modifier = ft_strsub(*sp, 0, 1);
-		*sp++;
+		*sp += 1;
 	}
 	return (modifier);
 }

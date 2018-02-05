@@ -42,9 +42,11 @@ int				get_precision(char **sp);
 char			*get_modifier(char **sp);
 char			*get_type(char **sp);
 int				work_with_dec(t_spec sp, va_list ap);
-int				call_int(t_spec sp, int a);
+int				call_int(t_spec sp, intmax_t a);
 char			*precis(char *arg, t_spec sp);
 char			*width(t_spec sp, char *arg);
 char			*sign_int(char *arg, char *tmp, t_spec sp, int a);
+int				work_with_uns(t_spec sp, va_list ap);
+int				call_uint(t_spec sp, uintmax_t a);
 
 #endif

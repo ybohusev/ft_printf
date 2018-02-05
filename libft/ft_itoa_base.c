@@ -1,48 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/06 17:54:12 by ybohusev          #+#    #+#             */
-/*   Updated: 2017/11/06 17:54:17 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/05 10:19:58 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/05 10:20:00 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static	int		mem_size(intmax_t n)
+static	int		mem_size(intmax_t n, int base)
 {
-	int			i;
-	intmax_t	temp;
+	int		i;
 
-	temp = n;
 	i = 1;
-	while (temp / 10 != 0)
+	while (n / base != 0)
 	{
 		i++;
-		temp = temp / 10;
+		n = n / base;
 	}
 	if (n < 0)
 		return (i + 1);
 	return (i);
 }
 
-extern	char	*ft_itoa(intmax_t n)
+extern	char	*ft_itoa_base(intmax_t n, int base)
 {
-	intmax_t		temp;
-	char			*str;
-	int				i;
+	unsigned long long	temp;
+	char				*str;
+	int					i;
 
 	i = mem_size(n);
-	temp = n;
+	if (n < 0)
+		temp = n * -1;
+	else
+		temp = n;
 	str = (char*)malloc(i + 1);
 	if (str == NULL)
 		return (NULL);
 	str[i] = '\0';
-	if (temp < 0)
-		temp = temp * -1;
 	while (--i >= 0)
 	{
 		str[i] = temp % 10 + 48;

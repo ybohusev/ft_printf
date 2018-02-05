@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_int.c                                         :+:      :+:    :+:   */
+/*   call_uint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/05 12:58:44 by ybohusev          #+#    #+#             */
-/*   Updated: 2018/02/05 12:58:47 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/05 14:49:36 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/05 14:49:38 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,17 @@ static	int		zero(t_spec sp)
 	return (sp.width);
 }
 
-static	char	*d_sign(char *arg)
-{
-	char	*new;
-
-	arg++;
-	new = ft_strdup(arg);
-	arg--;
-	free(arg);
-	return (new);
-}
-
-extern	int		call_int(t_spec sp, intmax_t a)
+extern	int		call_uint(t_spec sp, uintmax_t a)
 {
 	char	*arg;
 	int		printed;
 	char	*tmp;
-	int		minus;
 
 	printed = 0;
-	minus = 1;
 	arg = ft_itoa(a);
-	if (a < 0)
-	{
-		minus = -1;
-		arg = d_sign(arg);
-	}
 	arg = precis(arg, sp);
 	tmp = arg;
 	arg = width(sp, arg);
-	arg = sign_int(arg, tmp, sp, minus);
 	if (sp.precision == 0 && a == 0)
 		printed = zero(sp);
 	else

@@ -17,6 +17,11 @@ static	int		parse(t_spec sp, va_list ap)
 	if (!ft_strcmp(sp.type, "d") || !ft_strcmp(sp.type,"i")
 		|| !ft_strcmp(sp.type, "D"))
 		return (work_with_dec(sp, ap));
+	else if (!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type,"u")
+		|| !ft_strcmp(sp.type, "x") || !ft_strcmp(sp.type, "O")
+		|| !ft_strcmp(sp.type,"U") || !ft_strcmp(sp.type, "X"))
+		return (work_with_uns(sp, ap));
+	return (0);
 }
 
 static	t_spec	separate_specifiers(char *specifiers)
@@ -100,10 +105,13 @@ extern	int		ft_printf(const char *format, ...)
 
 int		main()
 {
-	int i;
-	i = ft_printf("%+-5d\n", -15555555);
+	int 	i;
+	int	c;
+
+	c = 922;
+	i = ft_printf("%d\n", c);
 	printf("%d\n", i);
-	i = printf("%hd\n", '5');
+	i = printf("%x\n", c);
 	printf("%d\n", i);
 	return 0;
 }

@@ -106,12 +106,12 @@ extern	int		ft_printf(const char *format, ...)
 int		main()
 {
 	int 	i;
-	int	c;
+	unsigned int	c;
 
-	c = 922;
-	i = ft_printf("%d\n", c);
+	c = 100;
+	i = ft_printf("%#3x\n", c);
 	printf("%d\n", i);
-	i = printf("%x\n", c);
+	i = printf("%#3x\n", c);
 	printf("%d\n", i);
 	return 0;
 }

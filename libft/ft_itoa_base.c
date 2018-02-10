@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-static	int		mem_size(intmax_t n, int base)
+static	int		mem_size(uintmax_t n, int base)
 {
 	int		i;
 
@@ -22,32 +23,26 @@ static	int		mem_size(intmax_t n, int base)
 		i++;
 		n = n / base;
 	}
-	if (n < 0)
-		return (i + 1);
 	return (i);
 }
 
-extern	char	*ft_itoa_base(intmax_t n, int base)
+extern	char	*ft_itoa_base(uintmax_t n, int base)
 {
-	unsigned long long	temp;
 	char				*str;
 	int					i;
 
-	i = mem_size(n);
-	if (n < 0)
-		temp = n * -1;
-	else
-		temp = n;
+	i = mem_size(n, base);
 	str = (char*)malloc(i + 1);
 	if (str == NULL)
 		return (NULL);
 	str[i] = '\0';
 	while (--i >= 0)
 	{
-		str[i] = temp % 10 + 48;
-		temp = temp / 10;
+		if (n % base >= 10)
+			str[i] = n % base - 10 + 97;
+		else
+			str[i] = n % base + 48;
+		n = n / base;
 	}
-	if (n < 0)
-		str[0] = '-';
 	return (str);
 }

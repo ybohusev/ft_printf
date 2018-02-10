@@ -48,5 +48,6 @@ char			*width(t_spec sp, char *arg);
 char			*sign_int(char *arg, char *tmp, t_spec sp, int a);
 int				work_with_uns(t_spec sp, va_list ap);
 int				call_uint(t_spec sp, uintmax_t a);
+char			*hash_uint(char *arg, t_spec sp);
 
 #endif

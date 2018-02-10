@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 typedef	struct		s_list
 {
@@ -84,6 +85,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int					ft_sqrt(int nb);
-char				*ft_itoa_base(intmax_t n, int base);
+char				*ft_itoa_base(uintmax_t n, int base);
 
 #endif

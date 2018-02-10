@@ -33,7 +33,7 @@ extern	int		work_with_dec(t_spec sp, va_list ap)
 extern	int		work_with_uns(t_spec sp, va_list ap)
 {
 	if (!ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
- 		return (call_int(sp, va_arg(ap, unsigned long int)));
+ 		return (call_uint(sp, va_arg(ap, unsigned long int)));
 	else if (!sp.modifier || !ft_strcmp(sp.modifier, "h") ||
 		!ft_strcmp(sp.modifier, "hh"))
 		return (call_uint(sp, va_arg(ap, unsigned int)));

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 static	int		mem_size(intmax_t n)
 {

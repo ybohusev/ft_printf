@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <locale.h>
 
 static	int		parse(t_spec sp, va_list ap)
 {
@@ -21,6 +22,8 @@ static	int		parse(t_spec sp, va_list ap)
 		|| !ft_strcmp(sp.type, "x") || !ft_strcmp(sp.type, "O")
 		|| !ft_strcmp(sp.type,"U") || !ft_strcmp(sp.type, "X"))
 		return (work_with_uns(sp, ap));
+	else if (!ft_strcmp(sp.type, "c") || !ft_strcmp(sp.type,"C"))
+		return (work_with_char(sp, ap));
 	return (0);
 }
 
@@ -105,13 +108,12 @@ extern	int		ft_printf(const char *format, ...)
 
 int		main()
 {
+	setlocale(LC_ALL, "en_US.UTF-8");
 	int 	i;
-	unsigned int	c;
 
-	c = 100;
-	i = ft_printf("%#3x\n", c);
+	i = ft_printf("%lcq\n", L'。');
 	printf("%d\n", i);
-	i = printf("%#3x\n", c);
+	i = printf("%lcq\n", L'。');
 	printf("%d\n", i);
 	return 0;
 }

@@ -17,25 +17,25 @@ static	int		zero(t_spec sp)
 	int		i;
 
 	i = 1;
-	if (sp.flag.minus && sp.flag.plus)
-		ft_putchar('+');
+	if (sp.flag.minus && sp.flag.hash &&
+		(!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type, "O")))
+		ft_putchar('0');
 	while (i < sp.width)
 	{
 		ft_putchar(' ');
 		i++;
 	}
-	if (!sp.flag.minus && sp.flag.plus)
-		ft_putchar('+');
+	if (!sp.flag.minus && sp.flag.hash &&
+		(!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type, "O")))
+		ft_putchar('0');
 	return (sp.width);
 }
 
 static	char	*ch_base(uintmax_t a, t_spec sp)
 {
 	char	*arg;
-	int		i;
 
 	arg = NULL;
-	i = 0;
 	if (!ft_strcmp(sp.type, "o") ||
 		!ft_strcmp(sp.type, "O"))
 		arg = ft_itoa_base(a, 8);
@@ -45,30 +45,38 @@ static	char	*ch_base(uintmax_t a, t_spec sp)
 	else if (!ft_strcmp(sp.type, "x") ||
 		!ft_strcmp(sp.type, "X"))
 		arg = ft_itoa_base(a, 16);
-	if (!ft_strcmp(sp.type, "X"))
-	{
-		while (arg[i])
-		{
-			if (ft_isalpha(arg[i]) && arg[i] >= 97 &&
-				arg[i] <= 122)
-				arg[i] = arg[i] - 32;
-			i++;
-		}
-	}
 	return (arg);
 }	
+
+static	void	capitalize(char *arg)
+{
+	int		i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (ft_isalpha(arg[i]) && arg[i] >= 97 &&
+			arg[i] <= 122)
+			arg[i] = arg[i] - 32;
+		i++;
+	}
+}
 
 extern	int		call_uint(t_spec sp, uintmax_t a)
 {
 	char	*arg;
 	int		printed;
+	int		tmp;
 
 	printed = 0;
 	arg = ch_base(a, sp);
 	arg = precis(arg, sp);
+	tmp = ft_strlen(arg);
 	arg = width(sp, arg);
-	if (sp.flag.hash)
-		arg = hash_uint(arg, sp);
+	if (sp.flag.hash && a != 0)
+		arg = hash_uint(arg, sp, tmp);
+	if (!ft_strcmp(sp.type, "X"))
+		capitalize(arg);
 	if (sp.precision == 0 && a == 0)
 		printed = zero(sp);
 	else

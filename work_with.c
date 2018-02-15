@@ -14,11 +14,14 @@
 
 extern	int		work_with_dec(t_spec sp, va_list ap)
 {
-	if (!ft_strcmp(sp.type, "D"))
- 		return (call_int(sp, va_arg(ap, long int)));
-	else if (!sp.modifier || !ft_strcmp(sp.modifier, "h") ||
-		!ft_strcmp(sp.modifier, "hh"))
+	if (!sp.modifier && ft_strcmp(sp.type, "D"))
 		return (call_int(sp, va_arg(ap, int)));
+	else if (!ft_strcmp(sp.type, "D"))
+ 		return (call_int(sp, va_arg(ap, long int)));
+ 	else if (!ft_strcmp(sp.modifier, "h"))
+		return (call_int(sp, (short)va_arg(ap, int)));
+	else if (!ft_strcmp(sp.modifier, "hh"))
+		return (call_int(sp, (char)va_arg(ap, int)));
  	else if (!ft_strcmp(sp.modifier, "l"))
  		return (call_int(sp, va_arg(ap, long int)));
  	else if (!ft_strcmp(sp.modifier, "ll"))
@@ -32,12 +35,15 @@ extern	int		work_with_dec(t_spec sp, va_list ap)
 
 extern	int		work_with_uns(t_spec sp, va_list ap)
 {
-	if (!ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
- 		return (call_uint(sp, va_arg(ap, unsigned long int)));
-	else if (!sp.modifier || !ft_strcmp(sp.modifier, "h") ||
-		!ft_strcmp(sp.modifier, "hh"))
+	if (!sp.modifier && ft_strcmp(sp.type, "U") && ft_strcmp(sp.type, "O"))
 		return (call_uint(sp, va_arg(ap, unsigned int)));
- 	else if (!ft_strcmp(sp.modifier, "l"))
+	else if (!ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
+ 		return (call_uint(sp, va_arg(ap, unsigned long int)));
+ 	else if (!ft_strcmp(sp.modifier, "hh"))
+		return (call_uint(sp, (unsigned char)va_arg(ap, unsigned int)));
+	else if (!ft_strcmp(sp.modifier, "h"))
+		return (call_uint(sp, (unsigned short)va_arg(ap, unsigned int)));
+ 	else if (!ft_strcmp(sp.modifier, "l") || !ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
  		return (call_uint(sp, va_arg(ap, unsigned long int)));
  	else if (!ft_strcmp(sp.modifier, "ll"))
 		return (call_uint(sp, va_arg(ap, unsigned long long int)));
@@ -46,4 +52,9 @@ extern	int		work_with_uns(t_spec sp, va_list ap)
 	else if (!ft_strcmp(sp.modifier, "z"))
 		return (call_uint(sp, va_arg(ap, size_t)));
 	return (0);
+}
+
+extern	int		work_with_char(t_spec sp, va_list ap)
+{
+	return (call_char(sp, va_arg(ap, unsigned int)));
 }

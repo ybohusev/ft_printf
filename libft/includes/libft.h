@@ -41,7 +41,7 @@ int					ft_toupper(int c);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncat(char *dest, const char *src, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-int					ft_putchar(char c);
+void				ft_putchar(char c);
 int					ft_putstr(const char *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *s, int fd);
@@ -88,5 +88,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_sqrt(int nb);
 char				*ft_itoa_base(uintmax_t n, int base);
 int					ft_putwchar(unsigned int a);
+int					ft_count_octets(unsigned int a);
 
 #endif

@@ -17,6 +17,13 @@
 # include "libft.h"
 # include <stdio.h>
 
+# define M_HH 1
+# define M_H 2
+# define M_L 3
+# define M_LL 4
+# define M_J 5
+# define M_Z 6
+
 typedef	struct	s_flags
 {
 	int			minus;
@@ -31,7 +38,7 @@ typedef	struct	s_specifiers
 	t_flags		flag;
 	int			width;
 	int			precision;
-	char		*modifier;
+	int			modifier;
 	char		*type;
 }				t_spec;
 
@@ -39,7 +46,7 @@ int				ft_printf(const char *format, ...);
 t_flags			get_flag(char **sp);
 int				get_width(char **sp);
 int				get_precision(char **sp);
-char			*get_modifier(char **sp);
+int				get_modifier(char **sp);
 char			*get_type(char **sp);
 int				work_with_dec(t_spec sp, va_list ap);
 int				call_int(t_spec sp, intmax_t a);
@@ -51,5 +58,6 @@ int				call_uint(t_spec sp, uintmax_t a);
 char			*hash_uint(char *arg, t_spec sp, int bwidth);
 int				work_with_char(t_spec sp, va_list ap);
 int				call_char(t_spec sp, unsigned int a);
+int				char_width(t_spec sp, int bytes);
 
 #endif

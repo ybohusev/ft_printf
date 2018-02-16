@@ -73,23 +73,29 @@ int		get_precision(char **sp)
 	return (precision);
 }
 
-char	*get_modifier(char **sp)
+int		get_modifier(char **sp)
 {
-	char	*modifier;
+	int		mod;
 
-	modifier = NULL;
-	if ((**sp == 'h' && *(*sp + 1) == 'h') ||
-		(**sp == 'l' && *(*sp + 1) == 'l'))
-	{
-		modifier = ft_strsub(*sp, 0, 2);
+	mod = 0;
+	if (!strncmp(*sp, "hh", 2))
+		mod = M_HH;
+	else if (!strncmp(*sp, "ll", 2))
+		mod = M_LL;
+	else if (!strncmp(*sp, "h", 1))
+		mod = M_H;
+	else if (!strncmp(*sp, "l", 1))
+		mod = M_L;
+	else if (!strncmp(*sp, "j", 1))
+		mod = M_J;
+	else if (!strncmp(*sp, "z", 1))
+		mod = M_Z;
+	if (mod == M_LL || mod == M_HH)
 		*sp += 2;
-	}
-	else if (**sp == 'h' || **sp == 'l' || **sp == 'j' || **sp == 'z')
-	{
-		modifier = ft_strsub(*sp, 0, 1);
+	else if (mod == M_L || mod == M_H ||
+			mod == M_J || mod == M_Z)
 		*sp += 1;
-	}
-	return (modifier);
+	return (mod);
 }
 
 char	*get_type(char **sp)

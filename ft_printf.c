@@ -111,9 +111,9 @@ int		main()
 	setlocale(LC_ALL, "en_US.UTF-8");
 	int 	i;
 
-	i = ft_printf("%lcq\n", L'。');
+	i = ft_printf("%s\n", "setlocale");
 	printf("%d\n", i);
-	i = printf("%lcq\n", L'。');
+	i = printf("%s\n", "setlocale");
 	printf("%d\n", i);
 	return 0;
 }

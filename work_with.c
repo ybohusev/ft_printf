@@ -18,17 +18,17 @@ extern	int		work_with_dec(t_spec sp, va_list ap)
 		return (call_int(sp, va_arg(ap, int)));
 	else if (!ft_strcmp(sp.type, "D"))
  		return (call_int(sp, va_arg(ap, long int)));
- 	else if (!ft_strcmp(sp.modifier, "h"))
+ 	else if (sp.modifier == M_H)
 		return (call_int(sp, (short)va_arg(ap, int)));
-	else if (!ft_strcmp(sp.modifier, "hh"))
+	else if (sp.modifier == M_HH)
 		return (call_int(sp, (char)va_arg(ap, int)));
- 	else if (!ft_strcmp(sp.modifier, "l"))
+ 	else if (sp.modifier == M_L)
  		return (call_int(sp, va_arg(ap, long int)));
- 	else if (!ft_strcmp(sp.modifier, "ll"))
+ 	else if (sp.modifier == M_LL)
 		return (call_int(sp, va_arg(ap, long long int)));
-	else if (!ft_strcmp(sp.modifier, "j"))
+	else if (sp.modifier == M_J)
 		return (call_int(sp, va_arg(ap, intmax_t)));
-	else if (!ft_strcmp(sp.modifier, "z"))
+	else if (sp.modifier == M_Z)
 		return (call_int(sp, va_arg(ap, ssize_t)));
 	return (0);
 }
@@ -39,22 +39,43 @@ extern	int		work_with_uns(t_spec sp, va_list ap)
 		return (call_uint(sp, va_arg(ap, unsigned int)));
 	else if (!ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
  		return (call_uint(sp, va_arg(ap, unsigned long int)));
- 	else if (!ft_strcmp(sp.modifier, "hh"))
+ 	else if (sp.modifier == M_HH)
 		return (call_uint(sp, (unsigned char)va_arg(ap, unsigned int)));
-	else if (!ft_strcmp(sp.modifier, "h"))
+	else if (sp.modifier == M_H)
 		return (call_uint(sp, (unsigned short)va_arg(ap, unsigned int)));
- 	else if (!ft_strcmp(sp.modifier, "l") || !ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
+ 	else if (sp.modifier == M_L || !ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "O"))
  		return (call_uint(sp, va_arg(ap, unsigned long int)));
- 	else if (!ft_strcmp(sp.modifier, "ll"))
+ 	else if (sp.modifier == M_LL)
 		return (call_uint(sp, va_arg(ap, unsigned long long int)));
-	else if (!ft_strcmp(sp.modifier, "j"))
+	else if (sp.modifier == M_J)
 		return (call_uint(sp, va_arg(ap, uintmax_t)));
-	else if (!ft_strcmp(sp.modifier, "z"))
+	else if (sp.modifier == M_Z)
 		return (call_uint(sp, va_arg(ap, size_t)));
 	return (0);
 }
 
 extern	int		work_with_char(t_spec sp, va_list ap)
 {
-	return (call_char(sp, va_arg(ap, unsigned int)));
+	wchar_t	a;
+	int		bytes;
+
+	bytes = 1;
+	a = va_arg(ap, unsigned int);
+	if (sp.modifier == M_L || !ft_strcmp(sp.type, "C"))
+		bytes = ft_count_octets(a);
+	if (!sp.flag.minus)
+		bytes += char_width(sp, bytes);
+	if (!sp.modifier && ft_strcmp(sp.type, "C"))
+		ft_putchar(a);
+	else if (sp.modifier == M_L || !ft_strcmp(sp.type, "C"))
+		ft_putwchar(a);
+	if (sp.flag.minus)
+		bytes += char_width(sp, bytes);
+	return (bytes);
 }
+
+// extern	int		work_with_str(t_spec sp, va_list ap)
+// {
+
+// 	if (!sp.modifier && ft_strcmp(sp.type, "S"))
+// }

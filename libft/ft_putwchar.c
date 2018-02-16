@@ -1,15 +1,14 @@
 #include "libft.h"
 
-static	int		mas1(unsigned int a)
+static	void	mas1(unsigned int a)
 {
 	unsigned char	ch;
 
 	ch = a;
 	write(1, &ch, 1);
-	return (1);
 }
 
-static	int		mas2(unsigned int a, unsigned int mask)
+static	void	mas2(unsigned int a, unsigned int mask)
 {
 	unsigned char	ch1;
 	unsigned char	ch2;
@@ -21,10 +20,9 @@ static	int		mas2(unsigned int a, unsigned int mask)
 	write(1, &ch, 1);
 	ch = (mask << 24) >> 24 | ch2;
 	write(1, &ch, 1);
-	return (2);
 }
 
-static	int		mas3(unsigned int a, unsigned int mask)
+static	void	mas3(unsigned int a, unsigned int mask)
 {
 	unsigned char	ch1;
 	unsigned char	ch2;
@@ -40,10 +38,9 @@ static	int		mas3(unsigned int a, unsigned int mask)
 	write(1, &ch, 1);
 	ch = (mask << 24) >> 24 | ch3;
 	write(1, &ch, 1);
-	return (3);
 }
 
-static	int		mas4(unsigned int a, unsigned int mask)
+static	void	mas4(unsigned int a, unsigned int mask)
 {
 	unsigned char	ch1;
 	unsigned char	ch2;
@@ -63,21 +60,20 @@ static	int		mas4(unsigned int a, unsigned int mask)
 	write(1, &ch, 1);
 	ch = (mask << 24) >> 24 | ch4;
 	write(1, &ch, 1);
-	return (4);
 }
 
 extern	int		ft_putwchar(unsigned int a)
 {
-	int				bits;
+	int				octets;
 	
-	bits = (int)ft_strlen(ft_itoa_base(a, 2));
-	if (bits <= 7)
-		return(mas1(a));
-	if (bits > 7 && bits <= 11)
-		return(mas2(a, 49280));
-	if (bits > 11 && bits <= 16)
-		return(mas3(a, 14712960));
-	if (bits > 16)
-		return(mas4(a, 4034953344));
-	return (0);
+	octets = ft_count_octets(a);
+	if (octets == 1)
+		mas1(a);
+	else if (octets == 2)
+		mas2(a, 49280);
+	else if (octets == 3)
+		mas3(a, 14712960);
+	else if (octets == 4)
+		mas4(a, 4034953344);
+	return (octets);
 }

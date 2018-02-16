@@ -14,31 +14,28 @@
 
 t_flags	get_flag(char **sp)
 {
-	int		i;
 	t_flags	flag;
 
-	i = 0;
 	flag.minus = 0;
 	flag.plus = 0;
 	flag.space = 0;
 	flag.hash = 0;
 	flag.zero = 0;
-	while ((*sp)[i] == '-' || (*sp)[i] == '+' || (*sp)[i] == ' ' ||
-			(*sp)[i] == '#' || (*sp)[i] == '0')
+	while (**sp == '-' || **sp == '+' || **sp == ' ' ||
+			**sp == '#' || **sp == '0')
 	{
-		if ((*sp)[i] == '-')
+		if (**sp == '-')
 			flag.minus = 1;
-		else if ((*sp)[i] == '+')
+		else if (**sp == '+')
 			flag.plus = 1;
-		else if ((*sp)[i] == ' ')
+		else if (**sp == ' ')
 			flag.space = 1;
-		else if ((*sp)[i] == '#')
+		else if (**sp == '#')
 			flag.hash = 1;
-		else if ((*sp)[i] == '0')
+		else if (**sp == '0')
 			flag.zero = 1;
-		i++;
+		(*sp)++;
 	}
-	*sp += i;
 	return (flag);
 }
 

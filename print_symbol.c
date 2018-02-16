@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_width.c                                       :+:      :+:    :+:   */
+/*   print_symbol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 08:46:19 by ybohusev          #+#    #+#             */
-/*   Updated: 2018/02/16 08:46:21 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/16 10:46:35 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/16 10:46:37 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		char_width(t_spec sp, int bytes)
+int		print_symbol(char *ch, t_spec sp)
 {
-	int		i;
+	int		bytes;
 
-	i = 0;
-	if (sp.width > bytes)
-	{
-		while (i < sp.width - bytes)
-		{
-			ft_putchar(' ');
-			i++;
-		}
-	}
-	return (i);
+	bytes = 0;
+	sp.width++;
+	bytes = ft_putstr(ch);
+	return (bytes);
 }

@@ -12,20 +12,44 @@
 
 #include "ft_printf.h"
 
-static	int		zero(t_spec sp)
+static	int		zero_width(t_spec sp)
 {
-	int		i;
-
-	i = 1;
-	if (sp.flag.minus && sp.flag.plus)
+	if (sp.flag.plus)
+	{
 		ft_putchar('+');
-	while (i < sp.width)
+		return (1);
+	}
+	else if (sp.flag.space)
 	{
 		ft_putchar(' ');
-		i++;
+		return (1);
 	}
-	if (!sp.flag.minus && sp.flag.plus)
-		ft_putchar('+');
+	return (0);
+}
+
+static	int		zero(t_spec sp)
+{
+	char	*tmp;
+
+	if (!sp.width)
+		return (zero_width(sp));
+	tmp = (char*)ft_memset(ft_strnew(sp.width), ' ', sp.width);
+	if (!sp.flag.minus)
+	{
+		if (sp.flag.plus)
+			tmp[ft_strlen(tmp) - 1] = '+';
+		else if (sp.flag.space)
+			tmp[ft_strlen(tmp) - 1] = ' ';
+	}
+	if (sp.flag.minus)
+	{
+		if (sp.flag.plus)
+			tmp[0] = '+';
+		else if (sp.flag.space)
+			tmp[0] = ' ';
+	}
+	ft_putstr(tmp);
+	free(tmp);
 	return (sp.width);
 }
 
@@ -49,7 +73,7 @@ extern	int		call_int(t_spec sp, intmax_t a)
 
 	printed = 0;
 	minus = 1;
-	arg = ft_itoa(a);
+	arg = ft_itoa_large(a);
 	if (a < 0)
 	{
 		minus = -1;
@@ -64,5 +88,5 @@ extern	int		call_int(t_spec sp, intmax_t a)
 	else
 		printed = ft_putstr(arg);
 	free(arg);
-	return(printed);
+	return (printed);
 }

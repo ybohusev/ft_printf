@@ -43,24 +43,23 @@ static	char	*add_ch(char *arg, t_spec sp, int a)
 	return (arg);
 }
 
-static	char	*change_ch_l(char *arg, t_spec sp, int a)
+static	char	*change_ch_l(char *arg, t_spec sp, int a, char *t)
 {
 	int		i;
+	char	*tmp;
 
-	i = 0;
-	while (ft_isdigit(arg[i]))
-		i++;
-	while(i != 0)
-	{
-		arg[i] = arg[i - 1];
-		i--;
-	}
+	tmp = arg;
+	i = ft_strlen(arg);
 	if (a < 0)
-		arg[0] = '-';
+		arg = ft_strjoin("-", arg);
 	else if (sp.flag.plus)
-		arg[0] = '+';
+		arg = ft_strjoin("+", arg);
 	else if (sp.flag.space)
-		arg[0] = ' ';
+		arg = ft_strjoin(" ", arg);
+	if (sp.width > (int)ft_strlen(t))
+		arg[i] = '\0';
+	if (tmp != arg)
+		free(tmp);
 	return (arg);
 }
 
@@ -69,7 +68,7 @@ extern	char	*sign_int(char *arg, char *tmp, t_spec sp, int a)
 	if (sp.width > (int)ft_strlen(tmp) && !sp.flag.minus)
 		arg = change_ch(arg, sp, a);
 	else if (sp.flag.minus && sp.width > (int)ft_strlen(tmp))
-		arg = change_ch_l(arg, sp, a);
+		arg = change_ch_l(arg, sp, a, tmp);
 	else if (a < 0 || sp.flag.plus || sp.flag.space)
 		arg = add_ch(arg, sp, a);
 	return (arg);

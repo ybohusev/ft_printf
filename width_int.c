@@ -21,7 +21,7 @@ extern	char	*width(t_spec sp, char *arg)
 	tmp = arg;
 	if ((diff = sp.width - (int)ft_strlen(arg)) > 0)
 	{
-		if(sp.flag.zero && !sp.flag.minus && sp.precision == -1)
+		if (sp.flag.zero && !sp.flag.minus && sp.precision == -1)
 		{
 			pos = (char*)ft_memset(ft_strnew(diff), '0', diff);
 			arg = ft_strjoin(pos, arg);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_uint.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/16 08:46:55 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/16 08:46:58 by ybohusev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static	char	*hash_oct(char *arg, t_spec sp)
@@ -13,18 +25,15 @@ static	char	*hash_oct(char *arg, t_spec sp)
 	{
 		while (ft_isdigit(arg[i]))
 			i++;
-		while(i != 0)
+		while (i != 0)
 		{
 			arg[i] = arg[i - 1];
 			i--;
 		}
-		arg[i] = '0';	
+		arg[i] = '0';
 	}
-	else if (!i && arg[i] != '0')
-	{
-		arg = ft_strjoin("0", arg);
+	else if (!i && arg[i] != '0' && (arg = ft_strjoin("0", arg)))
 		free(tmp);
-	}
 	else if (arg[i] != '0')
 		arg[i - 1] = '0';
 	return (arg);
@@ -74,7 +83,7 @@ static	char	*minus_hex(char *arg, int bwidth, t_spec sp)
 	else if (sp.width - bwidth == 1)
 		arg[len_arg + 1] = '\0';
 	free(tmp);
-	return(arg);
+	return (arg);
 }
 
 static	char	*hash_hex(char *arg, t_spec sp, int bwidth)

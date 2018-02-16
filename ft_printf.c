@@ -15,15 +15,19 @@
 
 static	int		parse(t_spec sp, va_list ap)
 {
-	if (!ft_strcmp(sp.type, "d") || !ft_strcmp(sp.type,"i")
+	if (!ft_strcmp(sp.type, "d") || !ft_strcmp(sp.type, "i")
 		|| !ft_strcmp(sp.type, "D"))
 		return (work_with_dec(sp, ap));
-	else if (!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type,"u")
+	else if (!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type, "u")
 		|| !ft_strcmp(sp.type, "x") || !ft_strcmp(sp.type, "O")
-		|| !ft_strcmp(sp.type,"U") || !ft_strcmp(sp.type, "X"))
+		|| !ft_strcmp(sp.type, "U") || !ft_strcmp(sp.type, "X"))
 		return (work_with_uns(sp, ap));
-	else if (!ft_strcmp(sp.type, "c") || !ft_strcmp(sp.type,"C"))
+	else if (!ft_strcmp(sp.type, "c") || !ft_strcmp(sp.type, "C"))
 		return (work_with_char(sp, ap));
+	else if (!ft_strcmp(sp.type, "s") || !ft_strcmp(sp.type, "S"))
+		return (work_with_str(sp, ap));
+	else if (!ft_strcmp(sp.type, "%"))
+		return (handle_btwper);
 	return (0);
 }
 
@@ -73,7 +77,7 @@ static	int		common(char **format, va_list ap)
 	int		count;
 
 	count = 0;
-	specifiers = get_specifiers(format, "sSpdDioOuUxXcC");
+	specifiers = get_specifiers(format, "sSpdDioOuUxXcC%");
 	count = parse(specifiers, ap);
 	return (count);
 }
@@ -104,16 +108,4 @@ extern	int		ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (printed);
-}
-
-int		main()
-{
-	setlocale(LC_ALL, "en_US.UTF-8");
-	int 	i;
-
-	i = ft_printf("%s\n", "setlocale");
-	printf("%d\n", i);
-	i = printf("%s\n", "setlocale");
-	printf("%d\n", i);
-	return 0;
 }

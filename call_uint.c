@@ -46,7 +46,7 @@ static	char	*ch_base(uintmax_t a, t_spec sp)
 		!ft_strcmp(sp.type, "X"))
 		arg = ft_itoa_base(a, 16);
 	return (arg);
-}	
+}
 
 static	void	capitalize(char *arg)
 {
@@ -82,5 +82,5 @@ extern	int		call_uint(t_spec sp, uintmax_t a)
 	else
 		printed = ft_putstr(arg);
 	free(arg);
-	return(printed);
+	return (printed);
 }

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_width.c                                       :+:      :+:    :+:   */
+/*   handle_btwper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 08:46:19 by ybohusev          #+#    #+#             */
-/*   Updated: 2018/02/16 08:46:21 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/16 15:32:19 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/16 15:32:21 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		char_width(t_spec sp, int bytes)
+static	int		plus(int i)
 {
-	int		i;
 
-	i = 0;
-	if (sp.width > bytes)
-	{
-		while (i < sp.width - bytes)
-		{
-			ft_putchar(' ');
-			i++;
-		}
-	}
-	return (i);
+}
+
+extern	int		handle_btwper(t_spec sp)
+{
+	
 }

@@ -16,6 +16,8 @@ int		print_symbol(char *ch, t_spec sp)
 {
 	int		bytes;
 
+	if (!ch)
+		return (ft_putstr("(null)"));
 	bytes = 0;
 	sp.width++;
 	bytes = ft_putstr(ch);

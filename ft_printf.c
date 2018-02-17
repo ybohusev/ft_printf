@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <locale.h>
 
 static	int		parse(t_spec sp, va_list ap)
 {
@@ -27,7 +26,7 @@ static	int		parse(t_spec sp, va_list ap)
 	else if (!ft_strcmp(sp.type, "s") || !ft_strcmp(sp.type, "S"))
 		return (work_with_str(sp, ap));
 	else if (!ft_strcmp(sp.type, "%"))
-		return (handle_btwper);
+		return (handle_btwper(sp));
 	return (0);
 }
 

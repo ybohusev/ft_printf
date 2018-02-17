@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static	int		plus(int i)
-{
+// static	int		plus(int i)
+// {
 
-}
+// }
 
 extern	int		handle_btwper(t_spec sp)
-{
-	
+{	
+	return (sp.width);
 }

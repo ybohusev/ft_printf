@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_symbol.c                                     :+:      :+:    :+:   */
+/*   ft_putwstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 10:46:35 by ybohusev          #+#    #+#             */
-/*   Updated: 2018/02/16 10:46:37 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/18 15:38:09 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/18 15:38:13 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		print_symbol(char *ch, t_spec sp)
+int					ft_putwstr(wchar_t *wstr)
 {
-	int		bytes;
+	int i;
+	int	prt;
 
-	if (!ch)
-		return (sp.width + ft_putstr("(null)"));
-	bytes = 0;
-	sp.width++;
-	bytes = ft_putstr(ch);
-	return (bytes);
+	i = 0;
+	prt = 0;
+	if (wstr != NULL)
+	{
+		while (wstr[i])
+		{
+			ft_putwchar(wstr[i]);
+			i++;
+			prt += ft_count_octets(wstr[i]);
+		}
+	}
+	return (prt);
 }

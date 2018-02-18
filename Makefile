@@ -79,8 +79,10 @@ SRC += ft_itoa_base.c
 SRC += ft_putwchar.c
 SRC += ft_count_octets.c
 SRC += ft_itoa_large.c
+SRC += ft_putwstr.c
 
 SRC += call_int.c
+SRC += call_char.c
 SRC += call_uint.c
 SRC += char_width.c
 SRC += ft_printf.c

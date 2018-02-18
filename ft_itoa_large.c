@@ -32,18 +32,19 @@ static	int		mem_size(intmax_t n)
 
 extern	char	*ft_itoa_large(intmax_t n)
 {
-	intmax_t		temp;
+	uintmax_t		temp;
 	char			*str;
 	int				i;
 
 	i = mem_size(n);
-	temp = n;
+	if (n < 0)
+		temp = n * -1;
+	else
+		temp = n;
 	str = (char*)malloc(i + 1);
 	if (str == NULL)
 		return (NULL);
 	str[i] = '\0';
-	if (temp < 0)
-		temp = temp * -1;
 	while (--i >= 0)
 	{
 		str[i] = temp % 10 + 48;

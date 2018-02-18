@@ -90,5 +90,6 @@ char				*ft_itoa_base(uintmax_t n, int base);
 int					ft_putwchar(unsigned int a);
 int					ft_count_octets(unsigned int a);
 char				*ft_itoa_large(intmax_t n);
+int					ft_putwstr(wchar_t *wstr);
 
 #endif

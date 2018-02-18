@@ -59,6 +59,8 @@ char			*hash_uint(char *arg, t_spec sp, int bwidth);
 int				work_with_char(t_spec sp, va_list ap);
 int				call_char(t_spec sp, unsigned int a);
 int				char_width(t_spec sp, int bytes);
+int				print_char(t_spec sp, unsigned int ch);
+int				print_wchar(t_spec sp, unsigned int wch);
 int				print_symbol(char *ch, t_spec sp);
 int				work_with_str(t_spec sp, va_list ap);
 int				handle_btwper(t_spec sp);

@@ -57,27 +57,11 @@ extern	int		work_with_uns(t_spec sp, va_list ap)
 
 extern	int		work_with_char(t_spec sp, va_list ap)
 {
-	wchar_t			wc;
-	unsigned char	ch;
-	int				bytes;
-
-	bytes = 1;
-	if (sp.modifier == M_L || !ft_strcmp(sp.type, "C"))
-	{
-		wc = va_arg(ap, unsigned int);
-		bytes = ft_count_octets(wc);
-	}
-	else
-		ch = (unsigned char)va_arg(ap, unsigned int);
-	if (!sp.flag.minus)
-		bytes += char_width(sp, bytes);
 	if (!sp.modifier && ft_strcmp(sp.type, "C"))
-		ft_putchar(ch);
-	else if (sp.modifier == M_L || !ft_strcmp(sp.type, "C"))
-		ft_putwchar(wc);
-	if (sp.flag.minus)
-		bytes += char_width(sp, bytes);
-	return (bytes);
+		return (print_char(sp, va_arg(ap, unsigned int)));
+	if (sp.modifier == M_L || !ft_strcmp(sp.type, "C"))
+		return (print_wchar(sp, va_arg(ap, unsigned int)));
+	return (0);
 }
 
 extern	int		work_with_str(t_spec sp, va_list ap)

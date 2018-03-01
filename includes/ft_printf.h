@@ -61,7 +61,8 @@ int				call_char(t_spec sp, unsigned int a);
 int				char_width(t_spec sp, int bytes);
 int				print_char(t_spec sp, unsigned int ch);
 int				print_wchar(t_spec sp, unsigned int wch);
-int				print_symbol(char *ch, t_spec sp);
+int				print_str(t_spec sp, char* str);
+int				print_wstr(t_spec sp, wchar_t* wstr);
 int				work_with_str(t_spec sp, va_list ap);
 int				handle_btwper(t_spec sp);
 

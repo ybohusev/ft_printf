@@ -66,5 +66,9 @@ extern	int		work_with_char(t_spec sp, va_list ap)
 
 extern	int		work_with_str(t_spec sp, va_list ap)
 {
-	return (print_symbol(va_arg(ap, char*), sp));
+	if (!sp.modifier && ft_strcmp(sp.type, "S"))
+		return (print_str(sp, va_arg(ap, char*)));
+	if (sp.modifier == M_L || !ft_strcmp(sp.type, "S"))
+		return (print_wstr(sp, va_arg(ap, wchar_t*)));
+	return (0);
 }

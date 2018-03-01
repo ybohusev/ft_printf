@@ -16,6 +16,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <wchar.h>
 # include <unistd.h>
 
 typedef	struct		s_list
@@ -91,5 +92,12 @@ int					ft_putwchar(unsigned int a);
 int					ft_count_octets(unsigned int a);
 char				*ft_itoa_large(intmax_t n);
 int					ft_putwstr(wchar_t *wstr);
+size_t				ft_wstrsize(wchar_t *wstr);
+size_t				ft_wstrlen(wchar_t *wstr);
+wchar_t				*ft_wstrsub(wchar_t const *s, unsigned int start, size_t len);
+wchar_t				*ft_wstrnew(size_t size);
+wchar_t				*ft_wstrjoin(wchar_t const *s1, wchar_t const *s2);
+wchar_t				*ft_wstrset(wchar_t *b, int c, size_t n);
+
 
 #endif

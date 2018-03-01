@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int					ft_putwstr(wchar_t *wstr)
+int		ft_putwstr(wchar_t *wstr)
 {
-	int i;
+	size_t i;
 	int	prt;
 
 	i = 0;
@@ -24,8 +24,8 @@ int					ft_putwstr(wchar_t *wstr)
 		while (wstr[i])
 		{
 			ft_putwchar(wstr[i]);
-			i++;
 			prt += ft_count_octets(wstr[i]);
+			i++;
 		}
 	}
 	return (prt);

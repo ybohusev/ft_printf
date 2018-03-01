@@ -100,6 +100,7 @@ SRC += sign_int.c
 SRC += width_int.c
 SRC += work_with.c
 SRC += handle_btwper.c
+SRC += print_ptr.c
 
 HED = ft_printf.h
 

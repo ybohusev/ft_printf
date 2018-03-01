@@ -25,6 +25,8 @@ static	int		parse(t_spec sp, va_list ap)
 		return (work_with_char(sp, ap));
 	else if (!ft_strcmp(sp.type, "s") || !ft_strcmp(sp.type, "S"))
 		return (work_with_str(sp, ap));
+	else if (!ft_strcmp(sp.type, "p"))
+		return (work_with_ptr(sp, ap));
 	else if (!ft_strcmp(sp.type, "%"))
 		return (handle_btwper(sp));
 	return (0);
@@ -78,6 +80,7 @@ static	int		common(char **format, va_list ap)
 	count = 0;
 	specifiers = get_specifiers(format, "sSpdDioOuUxXcC%");
 	count = parse(specifiers, ap);
+	free(specifiers.type);
 	return (count);
 }
 

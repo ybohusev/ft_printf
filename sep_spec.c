@@ -39,13 +39,19 @@ t_flags	get_flag(char **sp)
 	return (flag);
 }
 
-int		get_width(char **sp)
+int		get_width(char **sp, va_list ap)
 {
 	int		i;
 	int		width;
 
 	i = 0;
 	width = 0;
+	if ((*sp)[i] == '*')
+	{
+		width = va_arg(ap, int);
+		*sp += 1;
+		return (width);
+	}
 	while (ft_isdigit((*sp)[i]))
 		i++;
 	width = ft_atoi(*sp);
@@ -53,7 +59,7 @@ int		get_width(char **sp)
 	return (width);
 }
 
-int		get_precision(char **sp)
+int		get_precision(char **sp, va_list ap)
 {
 	int		i;
 	int		precision;
@@ -61,7 +67,15 @@ int		get_precision(char **sp)
 	i = 0;
 	precision = 0;
 	if ((*sp)[i] != '.')
+	{
+		if ((*sp)[i] == '*')
+		{
+			precision = va_arg(ap, int);
+			*sp += 1;
+			return (precision);
+		}
 		return (-1);
+	}
 	(*sp)++;
 	while (ft_isdigit((*sp)[i]))
 		i++;

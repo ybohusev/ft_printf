@@ -44,8 +44,8 @@ typedef	struct	s_specifiers
 
 int				ft_printf(const char *format, ...);
 t_flags			get_flag(char **sp);
-int				get_width(char **sp);
-int				get_precision(char **sp);
+int				get_width(char **sp, va_list ap);
+int				get_precision(char **sp, va_list ap);
 int				get_modifier(char **sp);
 char			*get_type(char **sp);
 int				work_with_dec(t_spec sp, va_list ap);
@@ -65,5 +65,7 @@ int				print_str(t_spec sp, char* str);
 int				print_wstr(t_spec sp, wchar_t* wstr);
 int				work_with_str(t_spec sp, va_list ap);
 int				handle_btwper(t_spec sp);
+int				work_with_ptr(t_spec sp, va_list ap);
+int				print_ptr(t_spec sp, void *ptr);
 
 #endif

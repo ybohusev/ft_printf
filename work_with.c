@@ -72,3 +72,9 @@ extern	int		work_with_str(t_spec sp, va_list ap)
 		return (print_wstr(sp, va_arg(ap, wchar_t*)));
 	return (0);
 }
+
+extern	int		work_with_ptr(t_spec sp, va_list ap)
+{
+	return (print_ptr(sp, va_arg(ap, void*)));
+}
+

@@ -12,12 +12,20 @@
 
 #include "ft_printf.h"
 
-// static	int		plus(int i)
-// {
-
-// }
-
 extern	int		handle_btwper(t_spec sp)
-{	
-	return (sp.width);
+{
+	char	*arg;
+	int		printed;
+
+	if (sp.width <= 1)
+		return (ft_putstr("%"));
+	arg = ft_strnew(sp.width);
+	arg = ft_memset(arg, ' ', sp.width);
+	if (!sp.flag.minus)
+		arg[sp.width - 1] = '%';
+	else
+		arg[0] = '%';
+	printed = ft_putstr(arg);
+	free(arg);
+	return (printed);
 }

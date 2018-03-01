@@ -32,19 +32,19 @@ static	int		parse(t_spec sp, va_list ap)
 	return (0);
 }
 
-static	t_spec	separate_specifiers(char *specifiers)
+static	t_spec	separate_specifiers(char *specifiers, va_list ap)
 {
 	t_spec	spec;
 
 	spec.flag = get_flag(&specifiers);
-	spec.width = get_width(&specifiers);
-	spec.precision = get_precision(&specifiers);
+	spec.width = get_width(&specifiers, ap);
+	spec.precision = get_precision(&specifiers, ap);
 	spec.modifier = get_modifier(&specifiers);
 	spec.type = get_type(&specifiers);
 	return (spec);
 }
 
-static	t_spec	get_specifiers(char **format, char *type)
+static	t_spec	get_specifiers(char **format, char *type, va_list ap)
 {
 	int		count;
 	char	*spec;
@@ -66,7 +66,7 @@ static	t_spec	get_specifiers(char **format, char *type)
 		count++;
 	}
 	spec = ft_strsub(*format, 1, count);
-	sep_spec = separate_specifiers(spec);
+	sep_spec = separate_specifiers(spec, ap);
 	free(spec);
 	*format += count;
 	return (sep_spec);
@@ -78,7 +78,7 @@ static	int		common(char **format, va_list ap)
 	int		count;
 
 	count = 0;
-	specifiers = get_specifiers(format, "sSpdDioOuUxXcC%");
+	specifiers = get_specifiers(format, "sSpdDioOuUxXcC%", ap);
 	count = parse(specifiers, ap);
 	free(specifiers.type);
 	return (count);

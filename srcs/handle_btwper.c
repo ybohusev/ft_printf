@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   handle_btwper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 20:22:06 by ybohusev          #+#    #+#             */
-/*   Updated: 2017/11/09 20:22:07 by ybohusev         ###   ########.fr       */
+/*   Created: 2018/02/16 15:32:19 by ybohusev          #+#    #+#             */
+/*   Updated: 2018/02/16 15:32:21 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-void	*ft_memcpy(void *str1, const void *str2, size_t n)
+extern	int		handle_btwper(t_spec sp)
 {
-	const unsigned char	*src;
-	unsigned char		*dest;
+	char	*arg;
+	int		printed;
 
-	src = (unsigned char*)str2;
-	dest = (unsigned char*)str1;
-	while (n--)
-		*dest++ = *src++;
-	return (str1);
+	if (sp.width <= 1)
+		return (ft_putstr("%"));
+	arg = ft_strnew(sp.width);
+	arg = ft_memset(arg, ' ', sp.width);
+	if (!sp.flag.minus)
+		arg[sp.width - 1] = '%';
+	else
+		arg[0] = '%';
+	printed = ft_putstr(arg);
+	free(arg);
+	printf("HERE\n");
+	return (printed);
 }

@@ -77,4 +77,3 @@ extern	int		work_with_ptr(t_spec sp, va_list ap)
 {
 	return (print_ptr(sp, va_arg(ap, void*)));
 }
-

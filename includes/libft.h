@@ -6,7 +6,7 @@
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 15:56:02 by ybohusev          #+#    #+#             */
-/*   Updated: 2017/11/19 17:37:56 by ybohusev         ###   ########.fr       */
+/*   Updated: 2018/03/06 09:27:43 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ char				*ft_itoa_large(intmax_t n);
 int					ft_putwstr(wchar_t *wstr);
 size_t				ft_wstrsize(wchar_t *wstr);
 size_t				ft_wstrlen(wchar_t *wstr);
-wchar_t				*ft_wstrsub(wchar_t const *s, unsigned int start, size_t len);
+wchar_t				*ft_wstrsub(wchar_t const *s, unsigned int start,
+								size_t len);
 wchar_t				*ft_wstrnew(size_t size);
 wchar_t				*ft_wstrjoin(wchar_t const *s1, wchar_t const *s2);
 wchar_t				*ft_wstrset(wchar_t *b, int c, size_t n);
-
 
 #endif

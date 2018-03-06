@@ -35,13 +35,13 @@ static	wchar_t	*prec_wstr(wchar_t *wstr, t_spec sp)
 	return (wstr);
 }
 
-extern	int		print_str(t_spec sp, char* str)
+extern	int		print_str(t_spec sp, char *str)
 {
 	char	*pos;
 	int		diff;
 
 	if (!str)
-		return(ft_putstr("(null)"));
+		return (ft_putstr("(null)"));
 	str = prec_str(str, sp);
 	if (sp.width <= (int)ft_strlen(str))
 		return (ft_putstr(str));
@@ -56,13 +56,13 @@ extern	int		print_str(t_spec sp, char* str)
 	return (diff);
 }
 
-extern	int		print_wstr(t_spec sp, wchar_t* wstr)
+extern	int		print_wstr(t_spec sp, wchar_t *wstr)
 {
 	wchar_t	*pos;
 	int		diff;
 
 	if (!wstr)
-		return(ft_putstr("(null)"));
+		return (ft_putstr("(null)"));
 	wstr = prec_wstr(wstr, sp);
 	if (sp.width <= (int)ft_wstrsize(wstr))
 		return (ft_putwstr(wstr));

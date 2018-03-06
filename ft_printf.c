@@ -44,11 +44,10 @@ static	t_spec	separate_specifiers(char *specifiers, va_list ap)
 	return (spec);
 }
 
-static	t_spec	get_specifiers(char **format, char *type, va_list ap)
+static	char	*get_specifiers(char **format, char *type)
 {
 	int		count;
 	char	*spec;
-	t_spec	sep_spec;
 	int		i;
 
 	count = 1;
@@ -66,21 +65,22 @@ static	t_spec	get_specifiers(char **format, char *type, va_list ap)
 		count++;
 	}
 	spec = ft_strsub(*format, 1, count);
-	sep_spec = separate_specifiers(spec, ap);
-	free(spec);
 	*format += count;
-	return (sep_spec);
+	return (spec);
 }
 
 static	int		common(char **format, va_list ap)
 {
-	t_spec	specifiers;
+	char	*spec;
+	t_spec	sep_spec;
 	int		count;
 
 	count = 0;
-	specifiers = get_specifiers(format, "sSpdDioOuUxXcC%", ap);
-	count = parse(specifiers, ap);
-	free(specifiers.type);
+	spec = get_specifiers(format, "sSpdDioOuUxXcC%");
+	sep_spec = separate_specifiers(spec, ap);
+	free(spec);
+	count = parse(sep_spec, ap);
+	free(sep_spec.type);
 	return (count);
 }
 
@@ -93,19 +93,15 @@ extern	int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) == '%')
-		{
-			format++;
-			ft_putchar('%');
-			printed++;
-		}
-		else if (*format == '%')
+		if (*format == '%')
 			printed += common((char**)&format, ap);
 		else
 		{
 			ft_putchar(*format);
 			printed++;
 		}
+		if (!ft_strlen((char*)format))
+			break ;
 		format++;
 	}
 	va_end(ap);

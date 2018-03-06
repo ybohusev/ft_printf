@@ -16,10 +16,13 @@ static	int		zero(t_spec sp)
 {
 	int		i;
 
-	i = 1;
+	i = 0;
 	if (sp.flag.minus && sp.flag.hash &&
 		(!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type, "O")))
+	{
+		i += 1;
 		ft_putchar('0');
+	}
 	while (i < sp.width)
 	{
 		ft_putchar(' ');
@@ -27,8 +30,11 @@ static	int		zero(t_spec sp)
 	}
 	if (!sp.flag.minus && sp.flag.hash &&
 		(!ft_strcmp(sp.type, "o") || !ft_strcmp(sp.type, "O")))
+	{
+		i += 1;
 		ft_putchar('0');
-	return (sp.width);
+	}
+	return (i);
 }
 
 static	char	*ch_base(uintmax_t a, t_spec sp)
@@ -78,7 +84,9 @@ extern	int		call_uint(t_spec sp, uintmax_t a)
 	if (!ft_strcmp(sp.type, "X"))
 		capitalize(arg);
 	if (sp.precision == 0 && a == 0)
+	{
 		printed = zero(sp);
+	}
 	else
 		printed = ft_putstr(arg);
 	free(arg);

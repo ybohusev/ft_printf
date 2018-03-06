@@ -6,7 +6,7 @@
 /*   By: ybohusev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:38:09 by ybohusev          #+#    #+#             */
-/*   Updated: 2018/02/18 15:38:13 by ybohusev         ###   ########.fr       */
+/*   Updated: 2018/03/06 09:25:19 by ybohusev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ft_putwstr(wchar_t *wstr)
 {
-	size_t i;
-	int	prt;
+	size_t	i;
+	int		prt;
 
 	i = 0;
 	prt = 0;
